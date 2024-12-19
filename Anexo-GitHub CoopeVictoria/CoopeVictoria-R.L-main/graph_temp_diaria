@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Open-Meteoのサンプル</title>
+</head>
+<body>
+  <canvas id="stage1"></canvas>
+
+  <canvas id="stage1" width= 1px padding= 1px></canvas>
+
+  <hr/>
+  
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.js"></script>
+
+    <script>
+    const url = 'https://api.open-meteo.com/v1/ecmwf?latitude=10.09&longitude=-84.29&hourly=temperature_2m';
+
+    fetch(url)
+    .then(data => data.json())
+    .then(json => drawChart(json))
+
+
+    function drawChart(json) {
+      const mydata = {
+        labels: json.hourly.time,
+        datasets: [{
+          label: 'Precipitación (mm)',
+          data: json.hourly.temperature_2m,
+          borderColor: 'rgb(192, 75, 75)',
+        }]
+      }
+
+      new Chart(document.getElementById('stage1'), {
+        type: 'line',
+        data: mydata,
+	fill: false,
+	backgroundColor: "rgba(255,99,132,0.1)",
+      });
+    }
+
+  </script>
+  <string>Fuente: OpenMeteo</string>
+
+
+  </script>
+</body>
+</html>
